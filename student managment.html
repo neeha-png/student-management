@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Management System</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #dbeafe, #e9d5ff);
+    margin: 0;
+    padding: 30px;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+}
+
+.form-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 5px 20px #0002;
+}
+
+h2, h3 {
+    text-align: center;
+    color: #1e40af;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    border: 1px solid #bbb;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+}
+
+.add-btn {
+    width: 100%;
+    margin-top: 20px;
+    background: #2563eb;
+}
+
+.add-btn:hover {
+    background: #1d4ed8;
+}
+
+.delete-btn {
+    background: #dc2626;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #2563eb;
+    color: white;
+}
+
+#message {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="form-box">
+    <h2>Add Student</h2>
+
+    <form id="studentForm">
+
+        <label>Student Name</label>
+        <input type="text" id="studentName"
+        placeholder="Enter student name" required>
+
+        <label>Roll Number</label>
+        <input type="text" id="rollNumber"
+        placeholder="Enter roll number" required>
+
+        <label>Course</label>
+        <input type="text" id="course"
+        placeholder="Enter course name" required>
+
+        <label>Email Address</label>
+        <input type="email" id="email"
+        placeholder="Enter email address" required>
+
+        <button type="submit" class="add-btn">
+            Add Student
+        </button>
+
+    </form>
+
+    <p id="message"></p>
+</div>
+
+<h2>Student List</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Course</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody id="studentList"></tbody>
+</table>
+
+</div>
+
+<script>
+
+// Load saved students
+let students = JSON.parse(
+    localStorage.getItem("students")
+) || [];
+
+const form = document.getElementById("studentForm");
+const studentList = document.getElementById("studentList");
+const message = document.getElementById("message");
+
+// Display students
+function displayStudents() {
+
+    studentList.innerHTML = "";
+
+    students.forEach((student, index) => {
+
+        let row = document.createElement("tr");
+
+        [
+            student.name,
+            student.roll,
+            student.course,
+            student.email
+        ].forEach(value => {
+            let cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+
+        let actionCell = document.createElement("td");
+
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "delete-btn";
+
+        deleteButton.addEventListener("click", () => {
+            deleteStudent(index);
+        });
+
+        actionCell.appendChild(deleteButton);
+        row.appendChild(actionCell);
+
+        studentList.appendChild(row);
+    });
+}
+
+// Add student
+form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("studentName").value.trim();
+    const roll = document.getElementById("rollNumber").value.trim();
+    const course = document.getElementById("course").value.trim();
+    const email = document.getElementById("email").value.trim();
+
+    if (!name || !roll || !course || !email) {
+        message.textContent = "Please fill all fields!";
+        message.style.color = "red";
+        return;
+    }
+
+    // Check duplicate roll number
+    const duplicate = students.some(
+        student => student.roll.toLowerCase() === roll.toLowerCase()
+    );
+
+    if (duplicate) {
+        message.textContent = "Roll number already exists!";
+        message.style.color = "red";
+        return;
+    }
+
+    const newStudent = {
+        name: name,
+        roll: roll,
+        course: course,
+        email: email
+    };
+
+    students.push(newStudent);
+
+    // Save in browser storage
+    localStorage.setItem(
+        "students",
+        JSON.stringify(students)
+    );
+
+    displayStudents();
+
+    form.reset();
+
+    message.textContent = "Student added successfully!";
+    message.style.color = "green";
+
+});
+
+// Delete student
+function deleteStudent(index) {
+
+    students.splice(index, 1);
+
+    localStorage.setItem(
+        "students",
+        JSON.stringify(students)
+    );
+
+    displayStudents();
+
+    message.textContent = "Student deleted successfully!";
+    message.style.color = "green";
+}
+
+// Display saved records when page opens
+displayStudents();
+
+</script>
+
+</body>
+</html>
