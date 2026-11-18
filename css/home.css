@@ -24,7 +24,7 @@ header h2 {
 
 
 nav {
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
     gap: 25px;
 }
@@ -81,6 +81,7 @@ nav a:hover {
 }
 
 .card {
+    height:300px;
     font-size: larger;
     background-color:white;
    padding: auto;
@@ -95,22 +96,23 @@ nav a:hover {
     justify-content: center;
     align-items: center;
     text-align: center;
+    border-width: 70px;   
    
 
 }
 
 .card:hover {
-    transform: translatey(-6px);
+    transform: translatex(6px);
 }
 
 .card h3 {
     color: #173b67;
-   
+    margin-bottom: 12px;
 }
 
 .card p {
     color: #173b67;
-    
+     margin-bottom: 18px;
    
 }
 
