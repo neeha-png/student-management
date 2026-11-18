@@ -81,31 +81,37 @@ nav a:hover {
 }
 
 .card {
+    font-size: larger;
     background-color:white;
-    padding: 50px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(28, 36, 57, 0.08);
+   padding: auto;
+    border-radius: 70px;
+    box-shadow: 0 5px 5px rgba(28, 36, 57, 0.08);
     transition: transform 0.3s;
     border-radius: 100px;
-    border-color: #103954;
+    border-color: #0b8be0;
     align-items: center;
-    margin: 10px;
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+   
 
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translatey(-6px);
 }
 
 .card h3 {
     color: #173b67;
-    margin-bottom: 12px;
-    padding:50px;
+   
 }
 
 .card p {
-    color: #08101a;
-    margin-bottom: 18px;
+    color: #173b67;
+    
+   
 }
 
 .card a {
