@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+    <link rel="stylesheet" href="css/students.css">
+</head>
+<body>
+
+    <header>
+        <h2>Student Management System</h2>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="add-student.html">Add Student</a>
+            <a href="students.html" class="active">Student List</a>
+            <a href="attendance.html">Attendance</a>
+            <a href="dashboard.html">Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Student List</h1>
+
+        <!-- Search box -->
+        <div class="toolbar">
+            <input type="search" id="searchInput" placeholder="Search by name or roll number..." aria-label="Search students">
+            <span class="count" id="countLabel"></span>
+        </div>
+
+        <!-- Student table -->
+        <div class="table-wrapper" id="tableWrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Roll No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Course</th>
+                        <th>Year</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="studentBody"></tbody>
+            </table>
+        </div>
+
+        <!-- Shown when there is nothing to display -->
+        <div class="empty" id="emptyState" hidden>
+            <p id="emptyMessage">No students found.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>Student Management System</p>
+    </footer>
+
+    <script src="js/students.js"></script>
+</body>
+</html>
