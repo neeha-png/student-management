@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
   <link rel="stylesheet" href="css/home.css">
+  <style>
+  table { width: 100%; border-collapse: collapse; background: #fff; margin-top: 10px; }
+  th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+  th { background: #b07218; color: #fff; }
+</style>
 </head>
 <body>
      <header>
@@ -16,6 +21,13 @@
 
   <h1>Dashboard</h1>
   <p>Total students: <span id="total-students">0</span></p>
+  <h2>B.Tech CSE, Year 3: <span id="class-count">0</span> students</h2>
+<table>
+  <thead>
+    <tr><th>Student ID</th><th>Name</th><th>Attendance</th></tr>
+  </thead>
+  <tbody id="class-body"></tbody>
+</table>
     <footer>
         <p>Student Management System</p>
     </footer>
